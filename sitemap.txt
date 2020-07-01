@@ -1,5 +1,0 @@
-https://alsjohnstone.com/
-https://alsjohnstone.com/2018/05/10/how-to-add-structured-data-with-google-tag-manager.html
-https://alsjohnstone.com/2016/03/13/how-to-add-google-analytics-to-your-jekyll-site.html
-https://alsjohnstone.com/2016/03/08/track-button-clicks-using-google-tag-manager.html
-https://alsjohnstone.com/about/

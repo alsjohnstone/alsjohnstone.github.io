@@ -11,8 +11,8 @@ collections:
 email: alsjohnstone@gmail.com
 description: Analytics Developer
 logo: "/assets/images/bar-chart.gif"
-baseurl: ''
-url: http://yourdomain.com
+baseurl: /
+url: https://alsjohnstone.com/
 paginate: 5
 name: Als Johnstone
 bio: Analytics Developer
@@ -28,3 +28,4 @@ gems:
 highlighter: rouge
 plugins:
 - jekyll-paginate
+- jekyll-sitemap
