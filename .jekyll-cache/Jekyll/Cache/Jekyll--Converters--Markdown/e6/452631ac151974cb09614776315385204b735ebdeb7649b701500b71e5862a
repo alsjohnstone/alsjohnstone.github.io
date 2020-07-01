@@ -1,0 +1,55 @@
+I"<p>Now that you have your Jekyll blog up and running, you’ll probably want to know if anyone is reading it. Here’s how to add Google Analytics to your Jekyll site in a few simple steps.</p>
+
+<amp-img layout="responsive" width="800" height="517" src="/assets/images/jekyll.jpg"></amp-img>
+
+<h2 id="get-your-google-analytics-tracking-code">Get your Google Analytics tracking code</h2>
+
+<p>Create your <a href="https://analytics.google.com/analytics/web/?authuser=0#provision/SignUp/" title="Google Analytics">Google Analytics account</a> if you haven’t already got one.</p>
+
+<p>Navigate to <em>Admin &gt; Property &gt; Tracking Info &gt; Tracking Code</em> and make a note of your Google Analytics tracking number and tracking code, you’ll need these later.</p>
+
+<hr />
+
+<h2 id="add-your-tracking-code-to-jekyll">Add your tracking code to Jekyll</h2>
+
+<p>Thanks to Jekyll’s templating system, you only have to add your tracking code once, and Jekyll will include the code on all of your blog pages.</p>
+
+<p>Create a new file called <code class="language-plaintext highlighter-rouge">analytics.html</code> in the <code class="language-plaintext highlighter-rouge">_includes</code> folder inside your Jekyll project and paste in your Google Analytics tracking code. It should look something like this:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span><span class="nx">i</span><span class="p">[</span><span class="dl">'</span><span class="s1">GoogleAnalyticsObject</span><span class="dl">'</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span><span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span>
+<span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">a</span><span class="p">.</span><span class="k">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+<span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="dl">'</span><span class="s1">script</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">https://www.google-analytics.com/analytics.js</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">ga</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="dl">'</span><span class="s1">create</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">UA-XXXXXXX-X</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="dl">'</span><span class="s1">send</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pageview</span><span class="dl">'</span><span class="p">);</span>
+  <span class="nx">test</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Remember to replace <code class="language-plaintext highlighter-rouge">UA-XXXXXXX-X</code> with <code class="language-plaintext highlighter-rouge">{{ site.google_analytics }}</code>.</p>
+
+<hr />
+
+<h2 id="add-google-analytics-tracking-id-to-jekylls-_configyml-file">Add Google Analytics Tracking ID to Jekyll’s _config.yml file</h2>
+
+<p>Under ‘Google service’, add your tracking ID and save.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">Google services</span>
+<span class="na">google_analytics</span><span class="pi">:</span> <span class="s">UA—XXXXXXXX-X</span>
+</code></pre></div></div>
+
+<p>Replace <code class="language-plaintext highlighter-rouge">UA—XXXXXXXX-X</code> with your own tracking ID.</p>
+
+<p>The last step is to open <code class="language-plaintext highlighter-rouge">_includes.head.html</code> and add this code before the end of the <code class="language-plaintext highlighter-rouge">&lt;/head&gt;</code> tag.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if site.google_analytics and jekyll.environment == 'production' % "}
+{% if site.google_analytics and jekyll.environment == 'production' % "}
+{% include analytics.html %}
+{% endif %}
+</code></pre></div></div>
+
+<p>This ensures that only page views in the production environment are registered with Google Analytics. Now when you run <code class="language-plaintext highlighter-rouge">jekyll serve</code> your Google Analytics code will not load.</p>
+
+<p>GitHub Pages is set to <code class="language-plaintext highlighter-rouge">jekyll.environment == 'production'</code> automatically, so you’re ready to start using Google Analytics!</p>
+:ET

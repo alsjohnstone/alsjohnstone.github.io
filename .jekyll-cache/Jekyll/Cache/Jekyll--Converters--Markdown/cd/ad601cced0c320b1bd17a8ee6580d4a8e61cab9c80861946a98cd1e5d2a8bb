@@ -1,0 +1,53 @@
+I"
+<p>Google Tag Manager is a great way to add structured data to your page templates.</p>
+
+<amp-img src="/assets/images/structured-data.jpg" height="343" width="1325" layout="responsive"></amp-img>
+
+<h3 id="benefits-of-implementing-with-gtm">Benefits of implementing with GTM</h3>
+
+<p>Adding your structured data using GTM can help you:</p>
+
+<ul>
+  <li>Cut down on development costs</li>
+  <li>Deploy quickly and avoid development scheduling</li>
+  <li>Structured data managed in one place with all other marketing tags</li>
+  <li>Built-in testing tools</li>
+</ul>
+
+<p>Be sure to use the JSON-LD format, as Google can still read this format when injected using GTM.</p>
+
+<h3 id="why-you-should-add-structured-data-to-your-site">Why you should add structured data to your site</h3>
+
+<p>Adding structured data to your website makes it eligible for <a href="https://developers.google.com/search/docs/guides/search-features" title="Search Features">Google’s Search Features</a></p>
+
+<p>This results in:</p>
+
+<ul>
+  <li>More organic traffic</li>
+  <li>Decreased bounce rate due to higher relevancy</li>
+  <li>Higher rankings</li>
+  <li>Better search experience for users</li>
+</ul>
+
+<h3 id="how-to-add-your-structured-data">How to add your structured data</h3>
+
+<h4 id="1-choose-a-structured-data-content-type">1) Choose a structured data content type</h4>
+
+<p>Pick a page template to add your structured data to. Adding structured data to a page template allows you to add structured data to multiple pages dynamically using one tag. Google have a list of supported content types in their <a href="https://developers.google.com/search/docs/data-types/article">developer documentation</a>.</p>
+
+<h4 id="2-add-the-structured-data-as-a-custom-html-tag">2) Add the structured data as a Custom HTML tag</h4>
+
+<p>Paste the strcutured data template in to a Custom HTML tag in GTM, we’ll be replacing the existing variables with dynamic variables.</p>
+
+<h4 id="3-add-your-dynamic-variables">3) Add your dynamic variables</h4>
+
+<p>Create Custom JavaScript Variables in GTM, you can scrape these from the page, or ask your developer to add these to the dataLayer.</p>
+
+<p>All you need to do is add your custom variales to your Custom HTML tag:</p>
+
+<amp-img src="/assets/images/ccustom-variables.jpg" height="308" width="634" layout="responsive"></amp-img>
+
+<h4 id="4-test-and-publish">4) Test and publish</h4>
+
+<p>Use GTM’s preview and debug panel and Google’s <a href="https://search.google.com/structured-data/testing-tool">Structured Data Testing Tool</a> to make sure your tag is working!</p>
+:ET

@@ -1,0 +1,67 @@
+I"�<p>In this post I’ll show you how to track button clicks by using Google Tag Manager to send events to Google Analytics.</p>
+
+<amp-img src="/assets/images/click-me.gif" height="349" width="660" layout="responsive" alt="Track button clicks with GTM"></amp-img>
+
+<h4 id="1-set-up-your-click-trigger">1) Set up your click trigger</h4>
+
+<p>First set up a generic click trigger. We’ll be updating this later.</p>
+
+<ol>
+  <li>Click <em>Trigger</em></li>
+  <li>Create a <em>new</em> Trigger</li>
+  <li>Choose <em>All Elements</em> under Click</li>
+  <li>Fire the trigger on <em>All Clicks</em></li>
+  <li><em>Save</em></li>
+</ol>
+
+<amp-img src="/assets/images/all-clicks-trigger.jpg" height="189" width="660" layout="responsive" alt="GTM trigger configuration"></amp-img>
+
+<p>Open up the GTM preview panel on your website and click the <em>variables</em> tab.</p>
+
+<p>Click the button you would like to track. You can now see the variables that define the specific button click. We’ll use these variables to update our generic click trigger so that it that only tracks your specific button clicks.</p>
+
+<amp-img src="/assets/images/variables.jpg" height="266" width="660" layout="responsive" alt="GTM variables"></amp-img>
+
+<hr />
+
+<h4 id="2-update-your-generic-click-trigger">2) Update your generic click trigger</h4>
+
+<ol>
+  <li>Give your generic click trigger a suitable name</li>
+  <li>Update to Fire on <em>Some Clicks</em>.</li>
+  <li>Choose <em>Click ID</em> &gt; <strong>Containing</strong> &gt; <strong>[Your button ID]</strong> eg <code class="language-plaintext highlighter-rouge">my-button</code></li>
+</ol>
+
+<amp-img src="/assets/images/trigger-connfig.jpg" height="245" width="660" layout="responsive" alt="GTM trigger configuration with some clicks"></amp-img>
+
+<hr />
+
+<h4 id="3-create-a-tag-that-sends-event-data-to-google-analytics">3) Create a tag that sends event data to Google Analytics</h4>
+
+<ol>
+  <li>Go to <em>Tags</em></li>
+  <li><em>Create</em> New tag</li>
+  <li>Choose the <em>Universal Google Analytics</em> tag type</li>
+  <li>Enter your Google analytics tracking ID</li>
+  <li>Choose the <em>Event</em> Track Type</li>
+  <li>Enter the <em>Category</em>,  <em>Action</em> and <em>Label</em></li>
+  <li>Under the Triggering section select your Click Trigger</li>
+  <li><em>Save</em></li>
+</ol>
+
+<amp-img src="/assets/images/button-click-event.jpg" height="308" width="660" layout="responsive" alt="GTM event"></amp-img>
+
+<p>I’ve already saved my Google Analytics ID in a constant variable and recommend you do the same. This way if you ever need to update the ID you only have to update one variable.</p>
+
+<hr />
+
+<h4 id="4-check-your-tag-is-working">4) Check your tag is working</h4>
+
+<p>Open the preview and debug window and make sure that the tag is firing correctly.</p>
+
+<amp-img src="/assets/images/check-button-click-tag.jpg" height="309" width="660" layout="responsive" alt="GTM tag firing"></amp-img>
+
+<p>Open Google Analytics and go to <em>Real-time</em> &gt; <em>Events</em> where you will be able to see your button clicks in real time.</p>
+
+<amp-img src="/assets/images/real-time-button-click.jpg" height="243" width="660" layout="responsive" alt="GA real-time events"></amp-img>
+:ET

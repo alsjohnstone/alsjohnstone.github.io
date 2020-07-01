@@ -1,0 +1,206 @@
+I"�d<p>Here’s how you can use Facebook’s open-source Prophet library in Google Sheets to create accurate time-series predictions using simple and intuitive parameters.</p>
+
+<amp-img src="/assets/images/sheets-prophet.png" width="1280" height="720" layout="responsive"></amp-img>
+
+<p>This is a proof-of-concept solution for Prophet forecasting in Google Sheets. You might want to build on this to include additional parameters that will give you greater control over the forecast model.</p>
+
+<h2 id="what-is-facebook-prophet">What is Facebook Prophet?</h2>
+
+<p><a href="https://facebook.github.io/prophet/">Prophet</a> is open source software released by Facebook’s Core Data Science team. It is a procedure for forecasting time series data and works best with time series that have strong seasonal effects and several seasons of historical data. It is available for download on CRAN and PyPI.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>Here’s an overview of the data flow for this solution:</p>
+
+<amp-img src="/assets/images/sheets-prophet-data-flow.png" width="1403" height="693" layout="responsive"></amp-img>
+
+<p>The user fills in the custom function and those variables are sent off to our Python script for forecasting and the results returned to Google Sheets.</p>
+
+<h2 id="get-started-by-building-your-own-api-with-python">Get started by building your own API with Python</h2>
+
+<p>We’ll be building our own API using <a href="https://fastapi.tiangolo.com/">FastAPI</a>, which is a modern, fast (high-performance), web framework for building APIs with Python. This will take parameters from the Google Sheets function and do all the forecasting in the background with Facebook Prophet. I won’t go in to how to use FastAPI but you can read all you need to know <a href="https://fastapi.tiangolo.com/">here</a>.</p>
+
+<p>Here we’re using some of the more intuitive parameters for Prophet, you can read more about the additional parameters that are available to you in the <a href="https://facebook.github.io/prophet/docs/quick_start.html#python-api">Prophet documentation</a>. I also found this <a href="https://towardsdatascience.com/implementing-facebook-prophet-efficiently-c241305405a3">Implementing Facebook Prophet efficiently</a> post on Towards Data Science really useful.</p>
+
+<figure class="highlight">
+  <pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">fastapi</span> <span class="kn">import</span> <span class="n">FastAPI</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">from</span> <span class="nn">fbprophet</span> <span class="kn">import</span> <span class="n">Prophet</span>
+
+<span class="k">class</span> <span class="nc">Data</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">length</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">ds</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="n">y</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">daily</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">weekly</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">annual</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">national_holidays</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
+
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s">"/prophecise/"</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">create_item</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Data</span><span class="p">):</span>
+
+    <span class="c1"># Create df from base model
+</span>    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">ds</span><span class="p">,</span> <span class="n">data</span><span class="p">.</span><span class="n">y</span><span class="p">)),</span> <span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s">'ds'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">])</span>
+
+    <span class="c1"># Add the cap and floor to df for logistic model
+</span>    <span class="k">if</span> <span class="n">data</span><span class="p">.</span><span class="n">model</span> <span class="o">==</span> <span class="s">"logistic"</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span>
+        <span class="n">df</span><span class="p">[</span><span class="s">'cap'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">upper</span>
+        <span class="n">df</span><span class="p">[</span><span class="s">'floor'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">lower</span>
+
+    <span class="c1"># make basic prediction
+</span>    <span class="n">m</span> <span class="o">=</span> <span class="n">Prophet</span><span class="p">(</span><span class="n">growth</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">weekly_seasonality</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">weekly</span><span class="p">,</span>
+                <span class="n">daily_seasonality</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">daily</span><span class="p">,</span>
+                <span class="n">yearly_seasonality</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">annual</span>
+                <span class="p">)</span>
+    
+    <span class="c1"># Add national holidays
+</span>    <span class="k">if</span> <span class="n">data</span><span class="p">.</span><span class="n">national_holidays</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">m</span><span class="p">.</span><span class="n">add_country_holidays</span><span class="p">(</span><span class="n">country_name</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">national_holidays</span><span class="p">)</span>
+    
+    <span class="c1"># Fit data frame
+</span>    <span class="n">m</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1"># Create data frame for future
+</span>    <span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">periods</span><span class="o">=</span><span class="n">data</span><span class="p">.</span><span class="n">length</span><span class="p">)</span>
+
+    <span class="c1"># Add the cap and floor to future for logistic model
+</span>    <span class="k">if</span> <span class="n">data</span><span class="p">.</span><span class="n">model</span> <span class="o">==</span> <span class="s">"logistic"</span><span class="p">:</span>
+        <span class="n">future</span><span class="p">[</span><span class="s">'cap'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">upper</span>
+        <span class="n">future</span><span class="p">[</span><span class="s">'floor'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">lower</span>
+
+    <span class="c1"># Prophecise!
+</span>    <span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+
+    <span class="c1"># Print values
+</span>    <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">forecast</span><span class="p">[[</span><span class="s">'ds'</span><span class="p">]].</span><span class="n">values</span><span class="p">))</span>
+
+    <span class="c1"># Return results
+</span>    <span class="k">return</span> <span class="p">[</span><span class="n">forecast</span><span class="p">[[</span><span class="s">'ds'</span><span class="p">]],</span> <span class="n">forecast</span><span class="p">[[</span><span class="s">'yhat'</span><span class="p">]],</span> <span class="n">forecast</span><span class="p">[[</span><span class="s">'yhat_lower'</span><span class="p">]],</span> <span class="n">forecast</span><span class="p">[[</span><span class="s">'yhat_upper'</span><span class="p">]]]</span></code></pre>
+</figure>
+
+<h2 id="upload-your-api-to-google-cloud-platform">Upload your API to Google Cloud Platform</h2>
+<p>We’ll be running our API on Google Cloud Platform using <a href="https://cloud.google.com/run">Cloud Run</a>, which is a fully managed compute platform for deploying and scaling containerized applications quickly and securely. You’ll need to add a billing account to GCP if you haven’t already, but there is a generous free tier.</p>
+
+<p>To deploy our API on Cloud Run we first need to containerize our app using Docker. If you’re not familiar with Docker, I recommend taking a look at their <a href="https://docs.docker.com/get-started/">documentation</a>. You’ll need to create a Dockerfile and deploy on Cloud Run which should look something like this:</p>
+
+<figure class="highlight">
+  <pre><code class="language-nginx" data-lang="nginx"><span class="k">FROM</span> <span class="nc">tiangolo/uvicorn-gunicorn-fastapi</span><span class="p">:</span><span class="s">python3.7</span>
+
+<span class="s">COPY</span> <span class="s">./app</span> <span class="n">/app</span>
+
+<span class="s">WORKDIR</span> <span class="n">/app</span>
+
+<span class="s">RUN</span> <span class="s">apt-get</span> <span class="s">-y</span> <span class="s">update</span>  <span class="s">&amp;&amp;</span> <span class="s">apt-get</span> <span class="s">install</span> <span class="s">-y</span> <span class="err">\</span>
+  <span class="s">python3-dev</span> <span class="err">\</span>
+  <span class="s">apt-utils</span> <span class="err">\</span>
+  <span class="s">python-dev</span> <span class="err">\</span>
+  <span class="s">build-essential</span> <span class="err">\</span>
+<span class="s">&amp;&amp;</span> <span class="s">rm</span> <span class="s">-rf</span> <span class="n">/var/lib/apt/lists/*</span>
+
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">--upgrade</span> <span class="s">setuptools</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">cython</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">numpy</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">pandas</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">matplotlib</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">pystan</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">fbprophet</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">fastapi</span>
+<span class="s">RUN</span> <span class="s">pip</span> <span class="s">install</span> <span class="s">pydantic</span></code></pre>
+</figure>
+
+<p>Once you’ve containerized your API you can <a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy">deploy to Cloud Run</a>. Once complete, you’ll be given a URL like the one shown below, which will be used as the API endpoint in our Apps Script.</p>
+
+<amp-img src="/assets/images/cloud-run.png" width="861" height="297" layout="responsive"></amp-img>
+
+<h2 id="finally-we-use-apps-script-to-call-our-api">Finally, we use Apps Script to call our API</h2>
+<p>Now we’re ready to set up our custom function for Sheets in Apps Script. We’ll take the user inputs from our custom function and send these on to our API for forecasting. The script below sets up the custom function, calls the API and returns the forecast to the user. You’ll need to update the <code class="language-plaintext highlighter-rouge">url</code> variable to your own Cloud Run URL.</p>
+
+<figure class="highlight">
+  <pre><code class="language-javascript" data-lang="javascript"><span class="cm">/**
+ * Forecast data using Facebook Prophet. Upper and Lower bounds are only required when using the logistic regression model. More information can be found at https://facebook.github.io/prophet/
+ *
+ * @param {A2:A150} dates - Select the pre-forecast date range as a STRING
+ * @param {B2:B150} values - Select the pre-forecast metric values as a STRING
+ * @param {14} forecastLength - How many days would you like to forecast?
+ * @param {"linear"} model - "linear" or "logistic"
+ * @param {"True"} annual - Does data contain annual seasonality? true or false
+ * @param {"False"} weekly - Does data contain weekly seasonality? true or false
+ * @param {"False"} daily - Does data contain daily seasonality? true or false
+ * @param {""} upper - Select the pre-forecast date range (Only required for logistic regression model)
+ * @param {""} lower - Select the pre-forecast date range (Only required for logistic regression model)
+ * @param {"UK"} nationalHolidays - ISO of country you'd like to add national holidays for e.g. "UK" 
+ * @return Facebook Prophet Forecast.
+ * @customfunction
+ */</span>
+
+<span class="kd">function</span> <span class="nx">prophecise</span><span class="p">(</span><span class="nx">dates</span><span class="p">,</span> <span class="nx">values</span><span class="p">,</span> <span class="nx">forecastLength</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">annual</span><span class="p">,</span> <span class="nx">weekly</span><span class="p">,</span> <span class="nx">daily</span><span class="p">,</span> <span class="nx">nationalHolidays</span><span class="p">,</span> <span class="nx">upper</span><span class="p">,</span> <span class="nx">lower</span><span class="p">)</span> <span class="p">{</span>
+  
+	<span class="c1">//  API endpoint</span>
+	<span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">YOUR_CLOUD_RUN_URL</span><span class="dl">'</span><span class="p">;</span>
+  
+	<span class="c1">// Format the date and values  </span>
+	<span class="kd">var</span> <span class="nx">dates</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">().</span><span class="nx">getRange</span><span class="p">(</span><span class="nx">dates</span><span class="p">).</span><span class="nx">getDisplayValues</span><span class="p">().</span><span class="nx">join</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">dates</span> <span class="o">=</span> <span class="nx">dates</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nb">String</span><span class="p">),</span>
+        <span class="nx">values</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">().</span><span class="nx">getRange</span><span class="p">(</span><span class="nx">values</span><span class="p">).</span><span class="nx">getDisplayValues</span><span class="p">().</span><span class="nx">join</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">values</span> <span class="o">=</span> <span class="nx">values</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nb">String</span><span class="p">),</span>
+        <span class="nx">formattedDates</span> <span class="o">=</span> <span class="nx">dates</span><span class="p">.</span><span class="nx">join</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">formattedMetrics</span> <span class="o">=</span> <span class="nx">values</span><span class="p">.</span><span class="nx">join</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">,</span><span class="dl">'</span><span class="p">),</span>
+        <span class="nx">preforecastData</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="dl">"</span><span class="s2">length</span><span class="dl">"</span><span class="p">:</span> <span class="nx">forecastLength</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">ds</span><span class="dl">"</span><span class="p">:</span> <span class="nx">formattedDates</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">y</span><span class="dl">"</span><span class="p">:</span> <span class="nx">formattedMetrics</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">model</span><span class="dl">"</span><span class="p">:</span> <span class="nx">model</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+		<span class="dl">"</span><span class="s2">annual</span><span class="dl">"</span><span class="p">:</span> <span class="nx">annual</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+		<span class="dl">"</span><span class="s2">weekly</span><span class="dl">"</span><span class="p">:</span> <span class="nx">weekly</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+		<span class="dl">"</span><span class="s2">daily</span><span class="dl">"</span><span class="p">:</span> <span class="nx">daily</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">(),</span>
+		<span class="dl">"</span><span class="s2">upper</span><span class="dl">"</span><span class="p">:</span> <span class="nx">upper</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">lower</span><span class="dl">"</span><span class="p">:</span> <span class="nx">lower</span><span class="p">,</span>
+		<span class="dl">"</span><span class="s2">national_holidays</span><span class="dl">"</span><span class="p">:</span> <span class="nx">nationalHolidays</span>
+	<span class="p">};</span>
+  
+	<span class="c1">// Add the pre-forecast data to the payload</span>
+	<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="dl">'</span><span class="s1">method</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">post</span><span class="dl">'</span><span class="p">,</span>
+		<span class="dl">'</span><span class="s1">contentType</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">json</span><span class="dl">'</span><span class="p">,</span>
+		<span class="dl">'</span><span class="s1">payload</span><span class="dl">'</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">preforecastData</span><span class="p">)</span>
+	<span class="p">};</span>
+  
+	<span class="c1">// Call prophecise API</span>
+	<span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">UrlFetchApp</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+  
+	<span class="c1">// Return forecast result</span>
+	<span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+	<span class="kd">var</span> <span class="nx">dates</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">json</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">ds</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">forecast</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">json</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">yhat</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">forecastresult</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="nx">dates</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">date</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">forecastresult</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">date</span><span class="p">]);</span>
+	<span class="p">});</span>
+	<span class="nx">forecast</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">yhat</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">forecastresult</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">yhat</span><span class="p">);</span>
+	<span class="p">})</span>
+	<span class="nx">forecastresult</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Date</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Forecast</span><span class="dl">"</span><span class="p">]);</span>
+	<span class="k">return</span> <span class="nx">forecastresult</span><span class="p">;</span>
+  
+<span class="p">}</span></code></pre>
+</figure>
+
+<h2 id="using-our-new-formula-in-google-sheets">Using our new formula in Google Sheets</h2>
+<p>I’ve been using the formula to forecast Google Analytics data in Google Sheets using the Google Analytics add-on and our custom function. So for example, the following function would take the dates from column A and the metrics in column B and return a 30 day forecast that takes in to account national holidays in the UK:</p>
+
+<p><code class="language-plaintext highlighter-rouge">=prophecise("A2:A","B2:B",30,"linear",true,false,false,"UK")</code></p>
+
+<amp-img src="/assets/images/prophet-function.png" width="933" height="466" layout="responsive"></amp-img>
+
+<p>In this example I then used the Prophet forecasts in a Google Data Studio dashboard to show predicted trends for KPIs.</p>
+
+<p>Hopefully you found this post useful and it has inspired you to start using your own Python/R functions in Google Sheets, just think of all the cool stuff you could do!</p>
+:ET

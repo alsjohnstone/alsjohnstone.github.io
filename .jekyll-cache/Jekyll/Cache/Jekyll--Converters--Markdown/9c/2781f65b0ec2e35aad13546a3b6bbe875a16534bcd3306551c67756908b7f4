@@ -1,0 +1,84 @@
+I"�<p>Knowing JavaScript can get you a long way in GTM, after all, it’s essentially just a JavaScript library. The two places you’ll be using JavaScript are in Custom JavaScript Variables and Custom HTML tags.</p>
+
+<amp-img src="/assets/images/javascript-tips.jpg" width="700" height="393" layout="responsive"></amp-img>
+
+<p>Here’s a few things that I’ve found really useful:</p>
+
+<h2 id="use-queryselector-and-queryselectorall">Use querySelector() and querySelectorAll()</h2>
+
+<p>You may be tempted to use the age old methods <code class="language-plaintext highlighter-rouge">getElementByTagName()</code> or <code class="language-plaintext highlighter-rouge">getElementById()</code>, which are perfectly valid, but wherever possible I’d recommend using CSS selectors in combination with <code class="language-plaintext highlighter-rouge">querySelector()</code> and <code class="language-plaintext highlighter-rouge">querySelectorAll()</code>.</p>
+
+<amp-img src="/assets/images/querySelector.png" width="682" height="183" layout="responsive"></amp-img>
+
+<p>In my opinion, this combination is one of the greatest ways to leverage GTM because they just make everything easier. For triggers alone, CSS selectors are life-savers because you can use the click element to target pretty much any element on the page, regardless of if they have ID or class attributes.</p>
+
+<amp-img src="/assets/images/cssselectors.png" width="700" height="183" layout="responsive"></amp-img>
+
+<p>If you’d like to brush up on your CSS selectors, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">MDN</a> and <a href="https://www.w3schools.com/cssref/css_selectors.asp">W3Schools</a> both have excellent resources.</p>
+
+<h2 id="remember-to-use-script-tags-in-your-custom-html">Remember to use &lt;script&gt; tags in your Custom HTML</h2>
+
+<p>When adding your JavaScript to Custom HTML tags, always remember to wrap in <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> tags. If you forget to do this your JavaScript will be rendered as text at the bottom of the page!</p>
+
+<p>If you haven’t already made this mistake and learned from it, take note.</p>
+
+<h2 id="you-can-refer-to-other-gtm-variables-in-the-javascript-context">You can refer to other GTM variables in the JavaScript context</h2>
+
+<p>A really useful feature of GTM is being able to refer to JavaScript variables.</p>
+
+<amp-img src="/assets/images/refer-to-variables.png" width="715" height="342" layout="responsive"></amp-img>
+
+<p>Here we are able to remove trailing whitespace from revenue in the ecommerce object.</p>
+
+<p><strong>Note that resolving a variable is quite an ‘expensive’ operation.</strong></p>
+
+<p>Statements in a loop are executed for each iteration of the loop, which can slow down your JavaScript.</p>
+
+<amp-img src="/assets/images/statements-in-loops.png" width="700" height="360" layout="responsive"></amp-img>
+
+<p>When writing JavaScript, It’s good practice to access the length of the property outside of the loop, this way the function is only evaluated once, which will make it run faster. In GTM, variables are stored as strings which are passed in to an eval() when required, this means calling functions multiple times in GTM will be even slower than usual. Even more reason to avoid putting statements in your loops!</p>
+
+<p>W3schools have more information on JavaScript performance.</p>
+
+<p><strong>You can even have a variable return a function and call that</strong></p>
+
+<p>This is really handy if you reusing snippets of code in different Custom HTML Tags or Custom JavaScript Variables in your GTM container.</p>
+
+<amp-img src="/assets/images/multiply-function.png" width="678" height="266" layout="responsive"></amp-img>
+
+<p>For example, you could have a function that creates a first party cookie, which you could use across multiple tags. When working on bigger projects, this tip can also help free up valuable space in your container, which has a limit of 200kb.</p>
+
+<h2 id="in-the-data-layer-array-indices-are-accessed-using-dot-notation">In the Data Layer, Array indices are accessed using dot notation</h2>
+
+<p>Normally in JavaScript we would use bracket notation to access array indices.</p>
+
+<amp-img src="/assets/images/bracket-notation.png" width="340" height="143"></amp-img>
+
+<p>However in the Data Layer Variable, in order to access array indices, you have to remember to use dot notation.</p>
+
+<amp-img src="/assets/images/dot-notation.png" width="347" height="115"></amp-img>
+
+<p>This is a mildly annoying quirk that you soon get used to, however it can catch you out if you’re not aware of it!</p>
+
+<p>Hope some of these tips come in handy for you when working in Google Tag Manager!</p>
+
+<h2 id="further-reading">Further reading</h2>
+
+<p>Websites</p>
+
+<ul>
+  <li><a href="https://www.codecademy.com/learn/introduction-to-javascript">Codeacademy JavaScript Course</a> - a great introduction to JavaScript</li>
+  <li><a href="https://www.w3schools.com/js/default.asp">W3schools JavaScript - Reference</a></li>
+  <li><a href="https://developer.mozilla.org/bm/docs/Web/JavaScript">MDN JavaScript - Reference</a></li>
+  <li><a href="https://www.w3schools.com/cssref/css_selectors.asp">W3schools CSS Selectors - Reference</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">MDN CSS Selectors - Reference</a></li>
+</ul>
+
+<p>Books</p>
+
+<ul>
+  <li><a href="http://shop.oreilly.com/product/0636920027690.do">DOM Enlightenment</a></li>
+  <li><a href="http://shop.oreilly.com/product/9780596517748.do">JavaScript: The Good Parts</a></li>
+  <li><a href="https://www.amazon.co.uk/Professional-JavaScript-Developers-Wrox-Guides/dp/1118026691">Professional JavaScript for Web Developers</a></li>
+</ul>
+:ET

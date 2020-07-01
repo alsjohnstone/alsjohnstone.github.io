@@ -1,0 +1,30 @@
+---
+title: Alistair Johnstone | Analytics Developer
+timezone: UTC
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
+email: alsjohnstone@gmail.com
+description: Analytics Developer
+logo: "/assets/images/bar-chart.gif"
+baseurl: ''
+url: http://yourdomain.com
+paginate: 5
+name: Als Johnstone
+bio: Analytics Developer
+author_image: "/assets/images/bar-chart.gif"
+twitter_username: alsjohnstone
+github_username: alsjohnstone
+analytics_id: ''
+markdown: kramdown
+kramdown:
+  parse_block_html: true
+gems:
+- jekyll-paginate
+highlighter: rouge
+plugins:
+- jekyll-paginate
