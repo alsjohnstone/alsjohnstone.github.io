@@ -1,6 +1,7 @@
 ---
 title: How to add Structured Data using Google Tag Manager
 date: 2018-05-10 00:00:00 Z
+permalink: how-to-add-stuctured-data-with-google-tag-manager
 layout: post
 ---
 
@@ -46,7 +47,7 @@ Create Custom JavaScript Variables in GTM, you can scrape these from the page, o
 
 All you need to do is add your custom variales to your Custom HTML tag:
 
-<amp-img src="/assets/images/ccustom-variables.jpg" height="308" width="634" layout="responsive"></amp-img>
+<amp-img src="/assets/images/custom-variables.jpg" height="308" width="634" layout="responsive"></amp-img>
 
 #### 4) Test and publish
 
