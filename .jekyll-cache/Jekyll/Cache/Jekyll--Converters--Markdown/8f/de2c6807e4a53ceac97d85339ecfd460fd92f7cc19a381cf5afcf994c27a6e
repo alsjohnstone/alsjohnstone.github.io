@@ -1,4 +1,4 @@
-I"
+I"
 <p>Google Tag Manager is a great way to add structured data to your page templates.</p>
 
 <amp-img src="/assets/images/structured-data.jpg" height="343" width="1325" layout="responsive"></amp-img>
@@ -45,7 +45,7 @@
 
 <p>All you need to do is add your custom variales to your Custom HTML tag:</p>
 
-<amp-img src="/assets/images/ccustom-variables.jpg" height="308" width="634" layout="responsive"></amp-img>
+<amp-img src="/assets/images/custom-variables.jpg" height="308" width="634" layout="responsive"></amp-img>
 
 <h4 id="4-test-and-publish">4) Test and publish</h4>
 

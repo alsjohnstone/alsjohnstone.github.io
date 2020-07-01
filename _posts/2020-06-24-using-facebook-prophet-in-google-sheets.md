@@ -102,7 +102,7 @@ We’ll be running our API on Google Cloud Platform using [Cloud Run](https://cl
 
 To deploy our API on Cloud Run we first need to containerize our app using Docker. If you’re not familiar with Docker, I recommend taking a look at their [documentation](https://docs.docker.com/get-started/). You’ll need to create a Dockerfile and deploy on Cloud Run which should look something like this:
 
-{% highlight nginx %}
+{% highlight Docker %}
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
 
 COPY ./app /app

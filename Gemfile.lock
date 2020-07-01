@@ -79,6 +79,7 @@ DEPENDENCIES
   jekyll-compose
   jekyll-paginate
   jekyll-sitemap
+  rouge
   tzinfo
   tzinfo-data
 
