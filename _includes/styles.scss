@@ -27,8 +27,8 @@ amp-img {
 
 $rs: 16px;
 
-$font-serif: Georgia,Cambria,"Times New Roman",Times,'Lora', serif;
-$font-sans: "Helvetica Neue", 'Open Sans', Arial, Helvetica, sans-serif;
+$font-serif: "Noto Sans";
+$font-sans: "Roboto", 'Open Sans', Arial, Helvetica, sans-serif;
 
 @mixin respond-to($breakpoint) {
   @media only screen and (max-width: $breakpoint + px) {
@@ -135,13 +135,15 @@ body {
       border-bottom: 0px;
     }
     .post-title {
-      letter-spacing: -0.02em;
-      font-weight: 700;
+      font-family: $font-serif;
+      letter-spacing: -0.5px;
+      font-weight: 600;
       font-style: normal;
       display: block;
-      font-size: 36px;
-      line-height: 1.15;
+      font-size: 32px;
+      line-height: 40px;
       margin: 0 0;
+      color: #202124;
       a {
         text-decoration: none;
         color: #333332;
@@ -151,12 +153,11 @@ body {
       }
     }
     .post-excerpt {
-      letter-spacing: -0.02em;
       font-weight: 300;
       font-style: normal;
-      font-size: 20px;
-      line-height: 1.59;
-      color: #666665;
+      font-size: 18px;
+      line-height: 32px;
+      color: #5f6368;
     }
     .post-meta {
       font-size: 14px;
@@ -230,7 +231,7 @@ body {
     letter-spacing: -0.04em;
     font-size: 50px;
     line-height: 1.1;
-    color: #333332;
+    color: #202124;
     margin-bottom: 50px;
   }
   .author-image {
@@ -260,13 +261,12 @@ body {
 
   .post-content {
     width: 100%;
-    font-family: $font-serif;
+    font-family: $font-sans;
     color: #333333;
     h1, h2, h3 {
       font-family: $font-sans;
     }
     h3, h4, h5, h6 {
-      letter-spacing: -0.02em;
       font-weight: 700;
       font-style: normal;
       font-size: 24px;
@@ -279,7 +279,6 @@ body {
       font-size: 36px;
     }
     h2, h1 {
-      letter-spacing: -0.02em;
       font-weight: 700;
       font-style: normal;
       line-height: 1.2;
@@ -297,12 +296,12 @@ body {
     p {
       font-weight: 400;
       font-style: normal;
-      font-size: 22px;
-      line-height: 1.59;
+      font-size: 18px;
+      line-height: 28px;
       letter-spacing: -.002em;
       margin-top: 30px;
       margin-bottom: 0;
-      color: #333333;
+      color: #5f6368;
       -webkit-hyphens: auto;
       -moz-hyphens: auto;
       hyphens: auto;
@@ -316,7 +315,6 @@ body {
     }
     figure {
       margin: 0;
-      padding: 0 0 30px;
     }
     figcaption {
       font-weight: 400;
