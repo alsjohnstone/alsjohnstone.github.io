@@ -1,5 +1,5 @@
 ---
-title: How to add Google Analytics to your Jekyll blog
+title: How to use Google Analytics with Jekyll
 date: 2016-03-13 00:00:00 Z
 permalink: how-to-add-google-analytics-to-your-jekyll-bogl
 layout: post
