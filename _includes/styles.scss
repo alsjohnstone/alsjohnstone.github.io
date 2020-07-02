@@ -1,6 +1,10 @@
 @import 'bourbon/bourbon';
 @import 'syntax-highlighting';
 
+* {
+  font-variant-ligatures: none;
+}
+
 $grey-color:       #828282;
 
 .icon {
