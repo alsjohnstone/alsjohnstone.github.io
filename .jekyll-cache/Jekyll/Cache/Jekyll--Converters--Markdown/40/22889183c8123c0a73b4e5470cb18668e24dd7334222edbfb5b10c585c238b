@@ -1,0 +1,22 @@
+I"�<p>Here’s how you can use Google Cloud’s Natural Language API to automate content classification on your website and upload the results to Google Analytics.</p>
+
+<amp-img src="/assets/images/nlp-ga.jpg" width="1280" height="720" layout="responsive"></amp-img>
+
+<p>This app scrapes the content from websites using an <a href="https://github.com/yujiosaka/headless-chrome-crawler">open-source web crawler</a> to scrape content from your website, runs the content through Google’s pre-trained content classification model and then uploads the results to Google Analytics using the Google Analytics <a href="https://developers.google.com/analytics/devguides/config/mgmt/v3">Management API</a>. It allows content creators to see patterns and insights based on categories aassigned by Google and enables segmentation of users by reading habits.</p>
+
+<h2 id="what-is-googles-nlp-api">What is Google’s NLP API?</h2>
+
+<p>Google’s <a href="https://cloud.google.com/natural-language">Natural Language API</a> is one of Google’s machine leaning and AI products. It allows us to derive insights from unstructured text using the same deep machine learning technology that powers both Google Search’s ability to answer specific user questions and the language-understanding system behind Google Assistant, which is pretty cool.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>Here’s an overview of the data flow for this solution:</p>
+
+<amp-img src="/assets/images/sheets-prophet-data-flow.png" width="1403" height="693" layout="responsive"></amp-img>
+
+<p>The user fills in the custom function and those variables are sent off to our Python script for forecasting and the results returned to Google Sheets.</p>
+
+<h2 id="potential-use-cases">Potential use cases</h2>
+
+<p>Hopefully you found this post useful and it has inspired you to start using your own Python/R functions in Google Sheets, just think of all the cool stuff you could do!</p>
+:ET

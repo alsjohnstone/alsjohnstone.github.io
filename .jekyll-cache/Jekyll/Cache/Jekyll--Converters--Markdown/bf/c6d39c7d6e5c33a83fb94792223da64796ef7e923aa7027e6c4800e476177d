@@ -1,0 +1,50 @@
+I"�<p>Automatically categorise all of the content on your website and upload the results to Google Analytics using Google Cloud Platform. This process can be scheduled so all new content is classified automatically.</p>
+
+<amp-img src="/assets/images/nlp-ga.jpg" width="1280" height="720" layout="responsive"></amp-img>
+
+<p>Here’s how you can scrape content from websites using an <a href="https://github.com/yujiosaka/headless-chrome-crawler">open-source web crawler</a>, run the content through Google’s pre-trained content classification model and then uploads the results to Google Analytics using the Google Analytics <a href="https://developers.google.com/analytics/devguides/config/mgmt/v3">Management API</a>.</p>
+
+<h2 id="why">Why?</h2>
+
+<p>Classifying your content allows content creators to see patterns and insights based on categories aassigned by Google and enables segmentation of users by reading habits. Categorising your content automatically also improves speed and accuracy while reducing manual labor.</p>
+
+<h2 id="what-is-googles-nlp-api">What is Google’s NLP API?</h2>
+
+<p>Google’s <a href="https://cloud.google.com/natural-language">Natural Language API</a> is one of Google’s machine leaning and AI products. It allows us to derive insights from unstructured text using the same deep machine learning technology that powers both Google Searchand the language-understanding system behind Google Assistant.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>We’ll use a Google Compute Engine VM instance to run the crawler script. Running the script in the cloud means you can scale up the instance to have more power than your local machine and the crawl will complete faster.</p>
+
+<amp-img src="/assets/images/sheets-prophet-data-flow.png" width="1403" height="693" layout="responsive"></amp-img>
+
+<p>The web crawler scrapes the relevant text content on the pages of your website and runs the result through Google’s Natural Language API which has the ability to classify documents in more than 700 predefined categories.</p>
+
+<p>The results are then uploaded to Google Analytics via the Management API, you’ll need to set up some custom dimensions and the data import in GA for this.</p>
+
+<h2 id="how-to-set-it-up">How to set it up</h2>
+
+<p>First you’ll need to set up a Google Cloud Platform project and enable billing.</p>
+
+<ol>
+  <li>Create three custom dimensions in GA for <code class="language-plaintext highlighter-rouge">Primary Category</code>, <code class="language-plaintext highlighter-rouge">Subcategory</code> and <code class="language-plaintext highlighter-rouge">Secondary Subcategory</code></li>
+  <li>Set up a Data Import in GA with the type “Content”. For the data set schema: “Key” should be set to <code class="language-plaintext highlighter-rouge">Page</code> and “Imported Data” should be set to the three new custom dimensions</li>
+  <li>Clone this repo <code class="language-plaintext highlighter-rouge">git clone https://github.com/alsjohnstone/scraper-classification.git</code></li>
+  <li>Enable NLP API and Analytics API in your GCP project</li>
+  <li>Create service worker account and download the credentials.json file</li>
+  <li>Update the config.json file</li>
+  <li>Create a new GCP storage bucket and add your config.json and credentials.json files</li>
+  <li>Update the bucket referenced in the install.sh file with your bucket</li>
+  <li>Run the command below to spin up a new GCP Compute Instance that will automatically shutdown after the crawl is complete.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcloud compute instances create scraper \
+    --machine-type=n1-standard-16 \
+    --metadata-from-file=startup-script=./install.sh \
+    --scopes=cloud-platform \
+    --zone=europe-west2-c
+</code></pre></div></div>
+
+<p>Restarting the GCP Compute Instance will automatically scrape, classify and upload the results to GA. You can schedule crawls using Cloud Scheduler.</p>
+
+:ET
