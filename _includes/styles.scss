@@ -4,6 +4,7 @@
 * {
   font-variant-ligatures: none;
   -webkit-font-variant-ligatures: none;
+  font-feature-settings: "liga" 0;
 }
 
 $grey-color:       #828282;
