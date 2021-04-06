@@ -1,5 +1,5 @@
 ---
-title: Use Google's Natural Language API to classify content in Google Analytics
+title: Use machine learning to automatically categorise content in Google Analytics
 date: 2020-07-28 13:45:00 Z
 permalink: use-googles-natural-language-api-to-classify-content-in-google-analytics
 categories:
