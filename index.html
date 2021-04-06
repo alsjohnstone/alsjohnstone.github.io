@@ -28,7 +28,7 @@ layout: default
 
   <nav class="pagination" role="navigation">
     {% if paginator.next_page %}
-      <a class="newer-posts" href="{{ site.baseurl }}/page{{paginator.next_page}}">&larr; Older posts</a>
+      <a class="newer-posts" href="{{ site.baseurl }}/page{{paginator.next_page}}">👈 Backwards</a>
     {% else %}
       <a class="newer-posts disabled">&larr; Older posts</a>
     {% endif %}
@@ -37,7 +37,7 @@ layout: default
       {% if paginator.page == 2 %}
         <a class="older-posts" href="{{ site.baseurl }}/">Newer posts &rarr;</a>
       {% else %}
-        <a class="older-posts" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Newer posts &rarr;</a>
+        <a class="older-posts" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Forwards 👉</a>
       {% endif %}
     {% else %}
       <a class="older-posts disabled">Newer posts &rarr;</a>

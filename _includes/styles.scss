@@ -4,8 +4,6 @@
 * {
   font-variant-ligatures: none;
   -webkit-font-variant-ligatures: none;
-  -webkit-font-feature-settings: 'liga' 0, 'onum' 1, 'kern' 1;
-  font-feature-settings: 'liga' 0, 'onum' 1, 'kern' 1;
 }
 
 $grey-color:       #828282;
@@ -34,8 +32,8 @@ amp-img {
 
 $rs: 16px;
 
-$font-serif: "Noto Sans";
-$font-sans: "Roboto", 'Open Sans', Arial, Helvetica, sans-serif;
+$font-serif: sans-serif;
+$font-sans: sans-serif;
 
 @mixin respond-to($breakpoint) {
   @media only screen and (max-width: $breakpoint + px) {
@@ -162,7 +160,7 @@ body {
     .post-excerpt {
       font-weight: 300;
       font-style: normal;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 32px;
       color: #5f6368;
     }
@@ -278,7 +276,7 @@ body {
       font-style: normal;
       font-size: 24px;
       line-height: 1.3;
-      margin-top: 50px;
+      margin-top: 30px;
       margin-bottom: 0px;
       font-family: $font-sans;
     }
@@ -289,7 +287,7 @@ body {
       font-weight: 700;
       font-style: normal;
       line-height: 1.2;
-      margin-top: 50px;
+      margin-top: 30px;
       margin-bottom: 0px;
     }
     table {
@@ -303,7 +301,7 @@ body {
     p {
       font-weight: 400;
       font-style: normal;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 28px;
       letter-spacing: -.002em;
       margin-top: 30px;
@@ -523,4 +521,23 @@ pre {
 
 .pagination .disabled {
     opacity: 0;
+}
+
+.wave {
+  animation-name: wave-animation;  /* Refers to the name of your @keyframes element below */
+  animation-duration: 2.5s;        /* Change to speed up or slow down */
+  animation-iteration-count: infinite;  /* Never stop waving :) */
+  transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+  display: inline-block;
+}
+
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+   10% { transform: rotate(14.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+   20% { transform: rotate(-8.0deg) }
+   30% { transform: rotate(14.0deg) }
+   40% { transform: rotate(-4.0deg) }
+   50% { transform: rotate(10.0deg) }
+   60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+  100% { transform: rotate( 0.0deg) }
 }
