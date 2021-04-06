@@ -24,7 +24,7 @@ Analytics Implementations / Data Engineering / Automation / Visualization
 
 
 ## Contact
-[als@alsjohnstone.com](mailto:als@alsjohnstone.com)  
+[a@als.im](mailto:a@als.im)  
 +44 7859883482  
 [LinkedIn](https://www.linkedin.com/in/alistair-johnstone)
 
