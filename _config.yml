@@ -10,13 +10,13 @@ collections:
     output: true
 email: alsjohnstone@gmail.com
 description: Freelance Analytics Developer
-logo: assets/images/bar-chart.gif
+logo: /assets/images/bar-chart.gif
 baseurl: 
 url: https://alsjohnstone.com
 paginate: 5
 name: Als Johnstone
 bio: Freelance Web Analytics Developer working primarily with the Google Stack (Google Analytics, Google Tag Manager, Data Studio, BigQuery)
-author_image: assets/images/bar-chart.gif
+author_image: /assets/images/bar-chart.gif
 twitter_username: alsjohnstone
 github_username: alsjohnstone
 analytics_id: ''
