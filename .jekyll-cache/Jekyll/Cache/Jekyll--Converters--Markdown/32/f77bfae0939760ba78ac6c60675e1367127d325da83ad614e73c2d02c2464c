@@ -1,0 +1,14 @@
+I"s<p>Here are some tools that I have been working on. They are all open source 🛠️.</p>
+
+<h1 id="prophecise">Prophecise</h1>
+
+<amp-img src="/assets/images/prophecise-data-flow.jpg" height="300" width="660" layout="responsive" alt="prophecise.com"></amp-img>
+<p><br />
+A web app (prophecise.com) that leverages Facebook Prophet to create fast and robust time-series forecasts from your Google Analytics data using a simple UI.</p>
+
+<h1 id="ml-content-classification-for-ga">ML Content Classification for GA</h1>
+
+<p>This app scrapes the content from websites using headless-chrome-crawler, runs the content through Google’s pre-trained content classification model and then uploads the results to Google Analytics using the Management API.</p>
+
+<p>To set this up, follow the instructions on my <a href="https://github.com/alsjohnstone/scraper-classification">GitHub repo</a>.</p>
+:ET
