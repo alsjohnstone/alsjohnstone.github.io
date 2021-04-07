@@ -5,7 +5,7 @@ layout: page
 ---
 
 <div id="hello">
-My name is Alistair Johnstone 👋  
+I'm Als 👋  
 
 I'm an Analytics Developer working primarily with the Google Stack (Google Analytics 360, Google Tag Manager 360, Data Studio, Apps Script, BigQuery).
 
