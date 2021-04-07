@@ -10,7 +10,7 @@ collections:
     output: true
 email: alsjohnstone@gmail.com
 description: Freelance Analytics Developer
-logo: /assets/images/bar-chart-small.gif
+logo: /assets/images/bar-chart.gif
 baseurl: 
 url: https://alsjohnstone.com
 paginate: 5
