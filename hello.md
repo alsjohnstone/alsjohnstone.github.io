@@ -15,11 +15,11 @@ I'm available at the moment. Please get in touch if you have something interesti
 5 years technical lead / architect
 
 ## Type of Projects
-Analytics Implementations / Data Engineering / Automation / Visualization 
+Analytics Implementations / Analytics Audits / Ecommerce Tracking / Data Visualization 
 
 ## Contact
 [a@als.im](mailto:a@als.im)  
 +44 7859883482  
 [LinkedIn](https://www.linkedin.com/in/alistair-johnstone)
 
-I live in Lewes, UK
+I live in Lewes, UK.
