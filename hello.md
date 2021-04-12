@@ -7,12 +7,9 @@ layout: page
 <div id="hello">
 I'm Als h👋  
 
-I'm an Analytics Developer working primarily with the Google Stack (Google Analytics 360, Google Tag Manager 360, Data Studio, Apps Script, BigQuery).
-
-I also work with **JavaScript**, **React**, **Node**, and **GCP**.
+I'm an Analytics Developer working primarily with the Google Stack (**GA**, **GTM**, **GA360**, **Data Studio**, **Apps Script**, **BigQuery**). I also work with **JavaScript**, **React**, **Node**, and **GCP**.
 
 I'm available at the moment. Please get in touch if you have something interesting :)
-
 
 ## Experience
 8 years marketing analytics  
