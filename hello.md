@@ -5,13 +5,13 @@ layout: page
 ---
 
 <div id="hello">
-I'm Als 👋  
+I'm Als h👋  
 
 I'm an Analytics Developer working primarily with the Google Stack (Google Analytics 360, Google Tag Manager 360, Data Studio, Apps Script, BigQuery).
 
 I also work with **JavaScript**, **React**, **Node**, and **GCP**.
 
-<span style="background-color: #55CFBE">I'm available</span> at the moment. Please get in touch if you have something interesting :)
+I'm available at the moment. Please get in touch if you have something interesting :)
 
 
 ## Experience
