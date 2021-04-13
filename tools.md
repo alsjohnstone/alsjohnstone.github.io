@@ -8,7 +8,7 @@ Here are a few tools that I've built to improve my Google Analytics workflow. I 
 
 # Prophecise
 
-[Prophecise](https://prophecise.com) is an open source web app that enables analysts and data scientists to quickly build forecast models from their Google Analytics data using a simple UI. It lets userspull reports directly from Google Analytics into the UI for forecasting.
+[Prophecise](https://prophecise.com) is an open source web app that enables analysts and data scientists to quickly build forecast models from their Google Analytics data using a simple UI. It lets users pull reports directly from Google Analytics into the UI for forecasting.
 
 <amp-img src="/assets/images/screely-1592742794169.png" height="362" width="660" layout="responsive" alt="prophecise.com"></amp-img>
 <br>
