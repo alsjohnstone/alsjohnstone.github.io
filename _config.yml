@@ -28,4 +28,4 @@ gems:
 highlighter: rouge
 plugins:
   - jekyll-sitemap
-  - jekyll-paginate
+    jekyll-paginate
