@@ -1,8 +1,8 @@
-I"Ä<p>Here are a few tools that I‚Äôve built to improve my Google Analytics workflow. I only create tools that I want to use myself, but I do think that these little utilities will be useful to others, so here they are.</p>
+I"Å<p>Here are a few tools that I‚Äôve built to improve my Google Analytics workflow. I only create tools that I want to use myself, but I do think that these little utilities will be useful to others, so here they are.</p>
 
 <h1 id="prophecise">Prophecise</h1>
 
-<p><a href="https://prophecise.com">Prophecise</a> is an open source web app that enables analysts and data scientists to quickly build forecast models from their Google Analytics data using a simple UI. It lets userspull reports directly from Google Analytics into the UI for forecasting.</p>
+<p><a href="https://prophecise.com">Prophecise</a> is an open source web app that enables analysts and data scientists to quickly build forecast models from their Google Analytics data using a simple UI. It lets users pull reports directly from Google Analytics into the UI for forecasting.</p>
 
 <amp-img src="/assets/images/screely-1592742794169.png" height="362" width="660" layout="responsive" alt="prophecise.com"></amp-img>
 <p><br /></p>

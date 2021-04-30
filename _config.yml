@@ -24,8 +24,8 @@ markdown: kramdown
 kramdown:
   parse_block_html: true
 gems:
-- jekyll-paginate
+  - jekyll-paginate
 highlighter: rouge
 plugins:
-- jekyll-paginate
-- jekyll-sitemap
+  - jekyll-sitemap
+  - jekyll-paginate
