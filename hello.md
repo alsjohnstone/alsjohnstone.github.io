@@ -6,7 +6,7 @@ layout: page
 
 I'm Als 👋  
 
-I'm an Analytics Developer working primarily with the Google Stack (**GA**, **GTM**, **GA360**, **Data Studio**, **Apps Script**, **BigQuery**). I also work with **JavaScript**, **React**, **Node**, and **GCP**.
+I'm an Analytics Developer working primarily with the Google Stack (**GA**, **GA360**, **GTM**, **Data Studio**, **Apps Script**, **BigQuery**). I also work with **JavaScript**, **React**, **Node**, and **GCP**.
 
 I'm available at the moment. Please get in touch if you have something interesting :)
 
