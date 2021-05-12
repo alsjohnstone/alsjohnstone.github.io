@@ -17,7 +17,7 @@ paginate: 5
 paginate_path: "/blog/page:num/"
 name: Als Johnstone
 bio: Freelance Web Analytics Developer working primarily with the Google Stack (Google Analytics, Google Tag Manager, Data Studio, BigQuery)
-author_image: /assets/images/bar-chart-small.png
+author_image: https://avatars.githubusercontent.com/u/3135625
 twitter_username: alsjohnstone
 github_username: alsjohnstone
 analytics_id: ''
