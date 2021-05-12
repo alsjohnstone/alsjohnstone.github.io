@@ -1,7 +1,7 @@
 ---
 title: JavaScript tips for Google Tag Manager
 date: 2018-09-21 00:00:00 Z
-permalink: tips-for-using-javascript-in-gtm
+permalink: /blog/tips-for-using-javascript-in-gtm
 layout: post
 ---
 

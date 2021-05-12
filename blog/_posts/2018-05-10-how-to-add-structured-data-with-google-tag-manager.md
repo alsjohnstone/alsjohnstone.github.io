@@ -1,7 +1,7 @@
 ---
 title: How to add Structured Data using Google Tag Manager
 date: 2018-05-10 00:00:00 Z
-permalink: how-to-add-stuctured-data-with-google-tag-manager
+permalink: /blog/how-to-add-stuctured-data-with-google-tag-manager
 layout: post
 ---
 

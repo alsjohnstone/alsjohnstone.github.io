@@ -1,7 +1,7 @@
 ---
 title: Track button clicks as Google Analytics events using Google Tag Manager
 date: 2016-03-08 00:00:00 Z
-permalink: track-button-clicks-using-google-tag-manager
+permalink: /blog/track-button-clicks-using-google-tag-manager
 layout: post
 ---
 
