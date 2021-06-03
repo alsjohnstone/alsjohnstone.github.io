@@ -7,6 +7,7 @@ categories:
 - Forecasting
 - Google Sheets
 layout: post
+description: How to use Facebook's open-source forecasting tool in Google Sheets to create accurate time-series predictions.
 ---
 
 Here’s how you can use Facebook’s open-source Prophet library in Google Sheets to create accurate time-series predictions using simple and intuitive parameters.

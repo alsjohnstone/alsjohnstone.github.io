@@ -8,6 +8,7 @@ categories:
 - Forecastr
 - Prophecise
 layout: post
+description: How I built an app that leverages Facebook Prophet to create fast and robust time-series forecasts from your Google Analytics data
 ---
 
 I built a [web app](https://prophecise.com) that leverages Facebook Prophet to create fast and robust time-series forecasts from your Google Analytics data, all wrapped up in a simple user interface.

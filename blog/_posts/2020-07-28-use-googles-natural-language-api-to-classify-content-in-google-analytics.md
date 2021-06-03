@@ -7,6 +7,7 @@ categories:
 - NLP
 - Machine Learning
 layout: post
+description: How to categorise all of the content on your website using machine learning and upload the results to Google Analytics using Google Cloud Platform.
 ---
 
 Automatically categorise all of the content on your website and upload the results to Google Analytics using Google Cloud Platform. This process can be scheduled so all new content is classified automatically.

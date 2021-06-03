@@ -2,6 +2,7 @@
 title: Tools
 permalink: "/tools"
 layout: page
+description: Here are a few utilities that I've built to improve my Google Analytics workflow.
 ---
 
 Here are a few tools that I've built to improve my Google Analytics workflow. I only create tools that I want to use myself, but I do think that these little utilities will be useful to others, so here they are.
